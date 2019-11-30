@@ -42,14 +42,6 @@ return [
 
     'connections' => [
 
-        'sqlite' => [
-            'driver' => 'sqlite',
-            'url' => env('DATABASE_URL'),
-            'database' => env('DB_DATABASE', database_path('database.sqlite')),
-            'prefix' => '',
-            'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
-        ],
-
 		'your_heroku_mysql_connection' => array(
 			'driver' => 'mysql',
 			'host' => $host,
@@ -60,6 +52,14 @@ return [
 			'collation' => 'utf8_unicode_ci',
 			'prefix' => '',
 		),
+		
+        'sqlite' => [
+            'driver' => 'sqlite',
+            'url' => env('DATABASE_URL'),
+            'database' => env('DB_DATABASE', database_path('database.sqlite')),
+            'prefix' => '',
+            'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
+        ],
 		
         'mysql' => [
             'driver' => 'mysql',
