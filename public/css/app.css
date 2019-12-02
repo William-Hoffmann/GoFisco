@@ -53,3 +53,18 @@ body {
 	color: #9E9E9E;
 	font-size: 10px
 }
+.input-link {
+    background: none;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+}
+.input-link:hover {
+    text-decoration: underline;
+}
+.card {
+    max-width: 100%;
+}
+.card-text {
+    word-wrap: break-word;
+}

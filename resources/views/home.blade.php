@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+	GoFisco.com - Dashboard
+@endsection
+
 @section('content')
 <div class=" ml-5 mt-5">
 	@if (session('status'))

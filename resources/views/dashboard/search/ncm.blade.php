@@ -15,36 +15,40 @@
     </div>
 	</form>
 	
+	@isset($details)
+	<!-- Exportar Planilhas -->
 	<form action="/excel">
-		<input type="submit" value="Download Excel">
+		<input type="submit" class="btn btn-primary mt-3" value="Download Excel">
+	<form>
+	<form action="/json">
+		<input type="submit" class="btn btn-primary mt-3" value="Visualizar Json">
 	<form>
 	
-		@isset($details)
-        <p class="mt-3 ml-1"><b> Resultados para  {{ $query }} </b></p>
-		<div class="table-responsive">
-			<table id="dtable" class="table table-hover display">
-				<thead class="thead-dark">
-					<tr>
-						<th>NCM</th>
-						<th>Descrição</th>
-						<th>CEST</th>
-						<th>MVA</th>
-						<th>Grupo</th>
-					</tr>
-				</thead>
-				<tbody>
-					@foreach($details as $ncm)
-					<tr>
-						<td >{{$ncm->ncm}}</td>
-						<td>{{$ncm->desc}}</td>
-						<td>{{$ncm->cest}}</td>
-						<td>{{$ncm->mva}}</td>
-						<td>{{$ncm->grupo}}</td>
-					</tr>
-					@endforeach
-				</tbody>
-			</table>
-		</div>
-		@endisset
+	<p class="mt-3 ml-1"><b> Resultados para  {{ $query }} </b></p>
+	<div class="table-responsive">
+		<table id="dtable" class="table table-hover display">
+			<thead class="thead-dark">
+				<tr>
+					<th>NCM</th>
+					<th>Descrição</th>
+					<th>CEST</th>
+					<th>MVA</th>
+					<th>Grupo</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach($details as $ncm)
+				<tr>
+					<td >{{$ncm->ncm}}</td>
+					<td>{{$ncm->desc}}</td>
+					<td>{{$ncm->cest}}</td>
+					<td>{{$ncm->mva}}</td>
+					<td>{{$ncm->grupo}}</td>
+				</tr>
+				@endforeach
+			</tbody>
+		</table>
+	</div>
+	@endisset
 		
 @stop

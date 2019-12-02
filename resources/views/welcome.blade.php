@@ -17,145 +17,186 @@
 
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-	<!-- Start Mobile First Button -->
-	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-    </button>
-	<!-- End Mobile First Button -->
-	<!-- Start Brand -->
-	<a class="navbar-brand mr-auto" href="#">
-		<img src="/img/logo.png" alt="GoFisco" class="brand">
-	</a>
-	<!-- End Brand -->
 	
-	<!-- Start Account Links -->
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav ml-auto">
-	  @if (Route::has('login'))
+	<!-- Brand Logo -->
+	<a class="navbar-brand mr-auto" href="#"><img src="/img/logo.png" alt="GoFisco" class="brand"></a>
+	
+	<!-- Mobile Button -->
+	<button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+	
+	<!-- Menu -->
+	<div class="collapse navbar-collapse" id="navbarCollapse">
+		<ul class="navbar-nav ml-auto">
+		
+		<!-- Bigger Devices -->
         @auth
-			<ul class="navbar-nav ml-auto">
-			@guest
-			<li class="nav-item">
-				<a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-			</li>
-			@if (Route::has('register'))
-				<li class="nav-item">
-					<a class="nav-link" href="{{ route('register') }}">{{ __('Criar Conta') }}</a>
-				</li>
-			@endif
-			@else
-				<li class="nav-item dropdown d-none d-lg-block">
-					<div class="btn-group">
-					  <button type="button" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						{{ Auth::user()->name }}
-					  </button>
-					  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-						<a class="dropdown-item" href="{{ url('/home') }}">Dashboard</a>
-						<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Sair') }}</a>
-						<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-							@csrf
-						</form>
-					  </div>
-					</div>
-				</li>
-			@endguest	
+		<li class="nav-item dropdown d-none d-lg-block">
+			<div class="btn-group">
+			  <button type="button" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				{{ Auth::user()->name }}
+			  </button>
+			  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+				<a class="dropdown-item" href="{{ route('home') }}">{{ __('Dashboard') }}</a>
+				<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Sair') }}</a>
+				<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
+			  </div>
+			</div>
+		</li>
 		@else
-			<li class="nav-item mt-2 mb-2">
-			  <a class="nav-link" href="{{ route('login') }}">Fazer Login</a>
-			</li>
-			<li class="nav-item mt-2 mb-2">
-			@if (Route::has('register'))
-			  <a class="nav-link" href="{{ route('register') }}">Criar Conta</a>
-			@endif
+		<li class="nav-item mt-2 mb-2">
+		  @if (Route::has('login'))
+			<a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+		  @endif
+		</li>
+		<li class="nav-item mt-2 mb-2">
+		  @if (Route::has('register'))
+			<a class="nav-link" href="{{ route('register') }}">{{ __('Criar Conta') }}</a>
+		  @endif
+		</li>
 		@endauth
-        </li>
-	  @endif
-      </ul>	  
+     
+		<!-- Smaller Devices -->
+		<li class="nav-item dropdown d-lg-none mt-2 mb-2">
+		@auth
+			<a class="nav-link dropdown-toggle" href="#" data-target="#smallerscreenuser" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">
+			  {{ Auth::user()->name }}
+			</a>				
+			<div class="collapse navbar-collapse" id="smallerscreenuser">
+				<ul class="navbar-nav ml-auto">
+					<li class="sub-item"><a class="dropdown-item" href="{{ route('home') }}">{{ __('Dashboard') }}</a></li>
+					<li class="sub-item"><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Sair') }}</a></li>
+					<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
+				</ul>
+			</div>
+		@endauth
+		</li>
+
+		</ul>	  
     </div>
-	<!-- End Account Links -->
+	
   </nav>
 </header>
 
 <main role="main">
 
+  <!-- Carousel -->
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
   
     <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class=""></li>
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
       <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-      <li data-target="#myCarousel" data-slide-to="2" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="2" class=""></li>
 	  <li data-target="#myCarousel" data-slide-to="3" class=""></li>
+	  <li data-target="#myCarousel" data-slide-to="4" class=""></li>
+	  <li data-target="#myCarousel" data-slide-to="5" class=""></li>
     </ol>
 	
     <div class="carousel-inner">
 	
-	  <!-- Slide 3 Database -->
+	  <!-- Slide 1 Apresentação -->
+      <div class="carousel-item active">
+		<div class="container">
+			<div class="row">
+			<div class="col-md-8 col-sm-12 order-2">
+			  <div class="carousel-caption text-center">
+				<h4 class="text-muted"><small>Apresentando</small></h4>
+				<h1 class="display-4 mb-4">GoFisco</h1>
+				<h4 class="mb-2"><small><b>Mas, o que é GoFisco.com?</b></small></h4>
+				<p>É uma ferramenta pensada e criada para gestores ficais de empresas e também para qualquer pessoa que precise de informações fiscais detalhadas sobre produtos.</p>
+			  </div>
+			</div>
+			<div class="d-none d-md-block col-md-4 order-1">
+				<div class="carousel-img-slide-one"></div>
+			</div>
+			</div>
+        </div>
+      </div>
+	
+	  <!-- Slide 2 Motivo -->
+      <div class="carousel-item">
+		<div class="container">
+			<div class="row">
+			<div class="col-md-12 col-sm-12 order-2">
+			  <div class="carousel-caption text-center">
+				<h4 class="text-muted"><small>Por que utilizar o GoFisco.com?</small></h4>
+				<h3 class="mb-4">Nos próximos slides você vai ver motivos suficiente para utilizar nossa ferramenta!</h3>
+				<small>Não é piada... É sério!</small>
+			  </div>
+			</div>
+			</div>
+        </div>
+      </div>
+	
+	  <!-- Slide 3 Serviços -->
+      <div class="carousel-item">
+		<div class="container">
+			<div class="row">
+			<div class="col-md-8 col-sm-12 order-1">
+			  <div class="carousel-caption text-center">
+				<h4 class="text-muted"><small>Disponibilidade</small></h4>
+				<h1 class="display-4 mb-4">Faça mais, Procure menos</h1>
+				<p>Sabemos como é frustrante achar uma informação sólida e simples na internet quando o assunto é fisco, por essa razão que o GoFisco foi criado, para agrupar e simplificar informações em um só lugar!</p>
+			  </div>
+			</div>
+			<div class="d-none d-md-block col-md-4 order-2">
+				<div class="carousel-img-slide-two"></div>
+			</div>
+			</div>
+        </div>
+      </div>
+	
+	  <!-- Slide 4 Segurança -->
       <div class="carousel-item">
 		<div class="container">
 			<div class="row">
 			<div class="col-md-6 col-sm-12 order-2">
 			  <div class="carousel-caption text-center">
-				<h1>BD Atualizado</h1>
-				<p>O banco de dados de nossa aplicação é 100% revisada semanalmente para inclusão e remoção de informações e estamos diariamente evoluindo e melhorando nossos processos para uma plataforma cada vez mais rápida e responsiva.</p>
+				<h4 class="text-muted"><small>Segurança</small></h4>
+				<h1 class="display-4 mb-4">Dados na Nuvem</h1>
+				<p>Acesse informações sempre que você precisar, sem a necessidade de carregar arquivos, pen-drives ou outras formas de armazenamento.</p>
 			  </div>
 			</div>
 			<div class="d-none d-md-block col-md-6 order-1">
-				<img src="/img/minis/carousel-db.png" alt="" class="carousel-img-db">
+				<div class="carousel-img-slide-three"></div>
 			</div>
 			</div>
         </div>
       </div>
-
-	  <!-- Slide 3 Diagrama -->
+	
+	  <!-- Slide 5  -->
       <div class="carousel-item">
 		<div class="container">
 			<div class="row">
-			<div class="d-none d-md-block col-md-6 order-2">
-				<img src="/img/minis/carousel-diag.png" alt="" class="carousel-img-diag">
-			</div>
-			<div class="col-md-6 col-sm-12 order-1">
-			  <div class="carousel-caption text-center text-sm-right">
-				<h1>Informações Interligadas</h1>
-				<p>Nossas informações estão todas interligadas e de acesso e exportação rápida e prática.</p>
+			<div class="col-md-8 col-sm-12 order-1">
+			  <div class="carousel-caption text-center">
+				<h4 class="text-muted"><small>Serviços</small></h4>
+				<h1 class="display-4 mb-4">Apps Prontos</h1>
+				<p>Acesso rápido e direto a cálculos fiscais, downloads e consultas!</p>
 			  </div>
+			</div>
+			<div class="d-none d-md-block col-md-4 order-2">
+				<div class="carousel-img-slide-four"></div>
 			</div>
 			</div>
         </div>
       </div>
-	  
-	  <!-- Slide 4 Cadastrar -->
+	
+	  <!-- Slide 6 Cadastro -->
       <div class="carousel-item">
 		<div class="container">
 			<div class="row">
 			<div class="col-md-12 col-sm-12 order-1">
 			  <div class="carousel-caption text-center big-text">
-				<h1>Gostou?</h1>
-				<h3>Então o você está esperando para se cadastrar e aproveitar todos os recursos, e o melhor... é de graça!</h3>
+				<h1 class="display-3 mb-3">Gostou?</h1>
+				<h4><small class="text-muted mb-3">Então o você está esperando para se cadastrar e aproveitar todos os recursos, e o melhor... é de graça!</small></h4>
 				@if (Route::has('register'))
-					<a href="{{ route('register') }}"><button type="button" class="btn btn-primary btn-lg">Clique aqui e faça o seu cadastro!</button></a>
+					<a href="{{ route('register') }}"><button type="button" class="btn btn-primary btn-success btn-lg">Clique aqui e faça o seu cadastro!</button></a>
 				@endif
 			  </div>
 			</div>
 			</div>
         </div>
       </div>
-	  
-	  <!-- Slide 1 Pizza -->
-      <div class="carousel-item active">
-		<div class="container">
-			<div class="row">
-			<div class="col-md-6 col-sm-12 order-2">
-			  <div class="carousel-caption text-center text-sm-left">
-				<h1>GoFisco.com</h1>
-				<p>GoFisco te ajuda a filtrar informações de forma  ágil e fácil. Com dados completos e atualizados, nossa ferramenta faz o simples e prático para que você que trabalha na área fiscal e contábil consiga realizar seus cadastros e lançamentos de forma correta.</p>
-			  </div>
-			</div>
-			<div class="d-none d-md-block col-md-6 order-1">
-				<img src="/img/minis/carousel-pizza.png" alt="" class="carousel-img-pizza">
-			</div>
-			</div>
-        </div>
-      </div>	
 		
     </div>
 	
@@ -170,72 +211,108 @@
 	
   </div>
 
-  <!-- Marketing messaging and featurettes
-  ================================================== -->
-  <!-- Wrap the rest of the page in another container to center all the content. -->
+  <hr class="featurette-divider">
+
+  <!-- Featurette -->
+  <div class="divider-1">
+	<div class="container">
+		<div class="row justify-content-center">
+			<p class="card-text display-4 text-center mt-5">Ainda não convencido?</p>
+			<p class="card-text display-4 text-center mb-5">Olhe o que mais você pode fazer!</p>
+		</div>
+	</div>
+  </div>
+	
+  <hr class="featurette-divider">
 	
   <div class="container marketing">
-	<hr class="featurette-divider">
-    
-	<div class="row">
-      <div class="col-md-3 session-headings">
-        <img src="/img/minis/heading-info.png" alt="Info" class="heading-icon" />
-        <h2 class="heading-title">Informação</h2>
-        <p>Dados completos e informações seguras e reais.</p>
+	
+    <div class="row featurette">
+      <div class="col-sm-12 col-md-7 order-md-1">
+        <h2 class="featurette-heading text-primary">Exporte! <span class="text-muted"> Crie planilhas com os dados pesquisados!</span></h2>
+        <p class="lead">Com apenas um clique você pode exportar informações pesquisadas de NCM, CEST e MVA. Ou se preferir exportar a tabela completa com todos nossos registros! Exatamente... tudo!</p>
       </div>
-      <div class="col-md-3 session-headings">
-        <img src="/img/minis/heading-time.png" alt="Info" class="heading-icon" />
-        <h2 class="heading-title">Ganhe Tempo</h2>
-        <p>Não perca tempo procurando informações na web. Reunimos todas em um único lugar</p>
-      </div>
-	  <div class="col-md-3 session-headings">
-        <img src="/img/minis/heading-calc.png" alt="Info" class="heading-icon" />
-        <h2 class="heading-title">Calculadora</h2>
-        <p>Calcule ou simule valores de ST, MVA e mais!</p>
-      </div>
-	  <div class="col-md-3 session-headings">
-        <img src="/img/minis/heading-excel.png" alt="Info" class="heading-icon" />
-        <h2 class="heading-title">Planilhas</h2>
-        <p>Exporte suas figuras fiscais criadas e outras tabelas em Excel.</p>
+      <div class="d-none d-md-block col-md-5 order-md-2">
+        <div class="featurette-img-one bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"></div>
       </div>
     </div>
 
     <hr class="featurette-divider">
 
     <div class="row featurette">
-      <div class="col-md-7">
-        <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
-        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+      <div class="col-sm-12 col-md-7 order-md-2">
+        <h2 class="featurette-heading text-primary">Dúvidas? <span class="text-muted"> Use o fórum para resolver seus problemas!</span></h2>
+        <p class="lead">Criamos o fórum com o íntuito de os próprios usuários se ajudarem, quando você não entende uma informação ou ela não está presente.</p>
       </div>
-      <div class="col-md-5" >
-        <img src="/img/promo-img-1.png" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto">
-      </div>
-    </div>
-
-    <hr class="featurette-divider">
-
-    <div class="row featurette">
-      <div class="col-md-7 order-md-2">
-        <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
-        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-      </div>
-      <div class="col-md-5 order-md-1">
-        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"></rect><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+      <div class="d-none d-md-block col-md-5 order-md-1">
+        <div class="featurette-img-two bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"></div>
       </div>
     </div>
 
     <hr class="featurette-divider">
-
+	
+	<div class="row featurette">
+      <div class="col-sm-12 col-md-7 order-md-1">
+        <h2 class="featurette-heading text-primary">Calcule! <span class="text-muted"> Não quebre mais a cabeça!</span></h2>
+        <p class="lead">Qualquer informação que você precisar calcular, temos a aplicação pronta, fácil e eficaz.</p>
+      </div>
+      <div class="d-none d-md-block col-md-5 order-md-2">
+        <div class="featurette-img-three bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"></div>
+      </div>
+    </div>
+	
+  </div>
+	
+  <hr class="featurette-divider">
+  
+  <div class="divider-2">
+	<div class="container">
+		<div class="row justify-content-center">
+			<p class="card-text display-4 text-center mt-5">E agora?</p>
+			<p class="card-text display-4 text-center mb-5">#Partiu fazer o GoFisco sua ferramenta fiscal?!</p>
+			@if (Route::has('register'))
+				<a href="{{ route('register') }}"><button type="button" class="btn btn-primary btn-success btn-lg mb-5">Clique aqui e faça o seu cadastro!</button></a>
+			@endif
+		</div>
+	</div>
   </div>
 
+  <!-- Footer -->
+  <footer class="footer pt-5">
+	<div class="container">
+    <div class="d-flex flex-wrap py-5 mb-5">
+      <div class="col-12 col-lg-4">
+		<div class="footer-logo"></div>
+      </div>
+      <div class="col-6 col-lg-4">
+        <h5 class="mb-3">Sobre</h5>
+        <ul>
+          <li class="mb-3"><a href="/">Sobre nós</a></li>
+		  <li class="mb-3"><a href="/">Termos de Uso</a></li>
+		  <li class="mb-3"><a href="/">Ajuda</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-4">
+        <h5 class="mb-3">Politicas</h5>
+        <ul>
+          <li class="mb-3"><a href="/">Privacidade</a></li>
+		  <li class="mb-3"><a href="/">Termos de Uso</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-  <!-- FOOTER -->
-  <footer class="container">
-	<div class="row">
-	  <div class="col-md-4"><p>© 2019 GoFisco.com</p></div>
-	  <div class="col-md-4"><p><a href="#">Privacy</a></p></div>
-	  <div class="col-md-4"><p><a href="#">Terms</a></p></div>
-	</div>
+  <div class="bg-light">
+    <div class="container py-4 flex-justify-between">
+      <ul class="d-flex">
+        <li class="mr-auto">© GoFisco 2019 - Todos direitos reservados</li>
+        <li class="ml-auto">Site criado com muito esmero por <a href="#">Grupo WM</a></li>
+		<li class="ml-auto"><a href="#">Voltar ao Topo</a></li>
+      </ul>
+    </div>
+  </div>
+	
+	
   </footer>
   
 </main>

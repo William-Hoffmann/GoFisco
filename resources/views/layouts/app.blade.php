@@ -27,100 +27,75 @@
 
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-	<!-- Start Mobile First Button -->
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-	<!-- End Mobile First Button -->
-	<!-- Start Brand -->
-    <a class="navbar-brand mr-auto" href="/home">
-        <img src="/img/logo.png" alt="GoFisco" class="brand">
-    </a>
-	<!-- End Brand -->
+ 
+	<!-- Brand Logo -->
+    <a class="navbar-brand mr-auto" href="/home"><img src="/img/logo.png" alt="GoFisco" class="brand"></a>
 	
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ml-auto">
-		@guest
-		<li class="nav-item">
-			<a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+	<!-- Mobile Button -->
+    <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+	
+	<!-- Menu -->
+	<div class="collapse navbar-collapse" id="navbarNavDropdown">
+		<ul class="navbar-nav ml-auto">
+		
+		<!-- Bigger Devices -->
+		@auth
+		<li class="nav-item dropdown d-none d-lg-block">
+			<div class="btn-group">
+			  <button type="button" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				{{ Auth::user()->name }}
+			  </button>
+			  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+				<a class="dropdown-item" href="#">Perfil</a>
+				<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Sair') }}</a>
+				<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
+			  </div>
+			</div>
 		</li>
-		@if (Route::has('register'))
-			<li class="nav-item">
-				<a class="nav-link" href="{{ route('register') }}">{{ __('Criar Conta') }}</a>
-			</li>
-		@endif
-		@else
-			<li class="nav-item dropdown d-none d-lg-block">
-				<div class="btn-group">
-				  <button type="button" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					{{ Auth::user()->name }}
-				  </button>
-				  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-					<a class="dropdown-item" href="#">Perfil</a>
-					<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Sair') }}</a>
-					<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-						@csrf
-					</form>
-				  </div>
-				</div>
-			</li>
-		@endguest		
-            <!-- This menu is hidden in bigger devices with d-sm-none. 
-           The sidebar isn't proper for smaller screens imo, so this dropdown menu can keep all the useful sidebar itens exclusively for smaller screens  -->
-            <li class="nav-item dropdown d-lg-none mt-2 mb-2">
-                <a class="nav-link dropdown-toggle" href="#" data-target="#smallerscreenmenu" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">
-                  Menu
-                </a>
-				<div class="collapse navbar-collapse row" id="smallerscreenmenu">
-					<ul class="navbar-nav ml-auto col-6">
-						<li class="sub-item"><a class="dropdown-item" href="/dashboard/search/ncm">Consulta NCM</a></li>
-						<li class="sub-item"><a class="dropdown-item" href="/dashboard/search/cest">Consulta CEST</a></li>
-						<li class="sub-item"><a class="dropdown-item" href="/dashboard/search/mva">Consulta MVA</a></li>
-						<li class="sub-item"><a class="dropdown-item" href="/dashboard/tools/ajuste">Ajuste de MVA</a></li>
-						<li class="sub-item"><a class="dropdown-item" href="/dashboard/tools/calculadora">Calculadora Tributária</a></li>
-						<li class="sub-item"><a class="dropdown-item" href="/dashboard/tools/simulador">Simulador de NFe</a></li>
-						<li class="sub-item"><a class="dropdown-item" href="/dashboard/tools/pautas">Pautas Fiscais</a></li>
-					</ul>
-					<ul class="navbar-nav ml-auto col-6">
-						<li class="sub-item"><a class="dropdown-item" href="#">Figura Fiscal Maker</a></li>
-						<li class="sub-item"><a class="dropdown-item" href="#">Info Fiscais</a></li>
-						<li class="sub-item"><a class="dropdown-item" href="#">Fórum</a></li>
-						<li class="sub-item"><a class="dropdown-item" href="#">Entrar em Contato</a></li>
-						<li class="sub-item"><a class="dropdown-item" href="#">Sobre o Site</a></li>
-						<li class="sub-item"><a class="dropdown-item" href="#">Ajuda</a></li>
-					</ul>
-				</div>
-            </li>
+		@endauth
+		
+		<!-- Smaller Devices -->
+		<li class="nav-item dropdown d-lg-none mt-2 mb-2">
+			<a class="nav-link dropdown-toggle" href="#" data-target="#smallerscreenmenu" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">
+			  Menu
+			</a>
+			<div class="collapse navbar-collapse row" id="smallerscreenmenu">
+				<ul class="navbar-nav ml-auto col-6">
+					<li class="sub-item"><a class="dropdown-item" href="/dashboard/search/ncm">Consulta NCM</a></li>
+					<li class="sub-item"><a class="dropdown-item" href="/dashboard/search/cest">Consulta CEST</a></li>
+					<li class="sub-item"><a class="dropdown-item" href="/dashboard/search/mva">Consulta MVA</a></li>
+					<li class="sub-item"><a class="dropdown-item" href="/dashboard/search/grupo">Consulta por Grupo</a></li>
+					<li class="sub-item"><a class="dropdown-item" href="/dashboard/tools/ajuste">Ajuste de MVA</a></li>
+					<li class="sub-item"><a class="dropdown-item" href="/dashboard/tools/calculadora">Calculadora Tributária</a></li>
+					<li class="sub-item"><a class="dropdown-item" href="/dashboard/tools/simulador">Simulador de NFe</a></li>
+				</ul>
+				<ul class="navbar-nav ml-auto col-6">
+					<li class="sub-item"><a class="dropdown-item" href="/dashboard/tools/pautas">Pautas Fiscais</a></li>
+					<li class="sub-item"><a class="dropdown-item" href="/dashboard/tools/pautas">Figura Fiscal Maker</a></li>
+					<li class="sub-item"><a class="dropdown-item" href="#">Inf.Fiscais</a></li>
+					<li class="sub-item"><a class="dropdown-item" href="#">Fórum</a></li>
+					<li class="sub-item"><a class="dropdown-item" href="#">Entrar em Contato</a></li>
+					<li class="sub-item"><a class="dropdown-item" href="#">Ajuda</a></li>
+				</ul>
+			</div>
+		</li>
+		<li class="nav-item dropdown d-lg-none mt-2 mb-2">
+		@auth
+			<a class="nav-link dropdown-toggle" href="#" data-target="#smallerscreenuser" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">
+			  {{ Auth::user()->name }}
+			</a>				
+			<div class="collapse navbar-collapse" id="smallerscreenuser">
+				<ul class="navbar-nav ml-auto">
+					<li class="sub-item"><a class="dropdown-item" href="#">Perfil</a></li>
+					<li class="sub-item"><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Sair') }}</a></li>
+					<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
+				</ul>
+			</div>
+		@endauth
+		</li>
 			
-			<li class="nav-item dropdown d-lg-none mt-2 mb-2">
-			
-			@guest
-			<li class="nav-item">
-				<a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-			</li>
-			@if (Route::has('register'))
-				<li class="nav-item">
-					<a class="nav-link" href="{{ route('register') }}">{{ __('Criar Conta') }}</a>
-				</li>
-			@endif
-			@else
-                <a class="nav-link dropdown-toggle" href="#" data-target="#smallerscreenuser" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">
-                  {{ Auth::user()->name }}
-                </a>				
-				<div class="collapse navbar-collapse" id="smallerscreenuser">
-					<ul class="navbar-nav ml-auto">
-						<li class="sub-item"><a class="dropdown-item" href="#">Perfil</a></li>
-						<li class="sub-item"><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Sair') }}</a></li>
-						<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-							@csrf
-						</form>
-					</ul>
-				</div>
-			@endguest
-            </li>
-            <!-- Smaller devices menu END -->
-        </ul>
-    </div>
+		</ul>
+	</div>
 	
   </nav>
 </header>
@@ -190,7 +165,7 @@
                     <span class="menu-collapsed">Pautas Fiscais</span>
                 </div>
             </a>
-			<a href="#" class="bg-dark list-group-item list-group-item-action">
+			<a href="/dashboard/tools/ffm" class="bg-dark list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-start align-items-center">
                     <span class="fa fa-envelope-o fa-fw mr-3"></span>
                     <span class="menu-collapsed">FFM - Figura Fiscal Maker</span>
@@ -217,12 +192,6 @@
                 <div class="d-flex w-100 justify-content-start align-items-center">
                     <span class="fa fa-question fa-fw mr-3"></span>
                     <span class="menu-collapsed">Entrar em Contato</span>
-                </div>
-            </a>
-			<a href="#" class="bg-dark list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                    <span class="fa fa-question fa-fw mr-3"></span>
-                    <span class="menu-collapsed">Sobre o Site</span>
                 </div>
             </a>
 			<a href="#" class="bg-dark list-group-item list-group-item-action">
@@ -267,8 +236,7 @@
 			
 			$(function() {
 				$('.mask').maskMoney({ decimal: '.', thousands: '', precision: 2 });
-			});
-			
+			});			
 		});
 	</script>
 

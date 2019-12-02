@@ -8,18 +8,8 @@ use App\Fisco;
 use App\Estados;
 use App\User;
 use DB;
-
 use App\Exports\DataExport;
 use Maatwebsite\Excel\Facades\Excel;
-
-
-class UsersController extends Controller 
-{
-    public function export() 
-    {
-        return Excel::download(new UsersExport, 'result.xlsx');
-    }
-}
 
 class HomeController extends Controller
 {
@@ -58,6 +48,11 @@ class HomeController extends Controller
         return view('dashboard.search.mva');
 	}
 	
+	public function searchGRUPO()
+    {		
+        return view('dashboard.search.grupo');
+	}
+	
 	public function toolsAJUSTE()
     {		
         return view('dashboard.tools.ajuste');
@@ -68,9 +63,19 @@ class HomeController extends Controller
         return view('dashboard.tools.calculadora');
 	}
 	
+	public function toolsSIMULADOR()
+    {		
+        return view('dashboard.tools.simulador');
+	}
+	
 	public function toolsPAUTAS()
     {		
         return view('dashboard.tools.pautas');
+	}
+	
+	public function toolsFFM()
+    {		
+        return view('dashboard.tools.ffm');
 	}
 	
 	/* Páginas Secundárias */
@@ -109,6 +114,18 @@ class HomeController extends Controller
 		else 
 			return view ('dashboard.search.mva')->withMessage($msg);
 	}
+			
+	public function redirecionaGRUPO(Request $request)
+	{
+		$q = $request->input('q'); // Recebe valor do input
+		$msg = "Sem resultados encontrados";
+		
+		$grupo = Fisco::where('grupo','LIKE', $q)->get(); // Query na tabela
+		if(count($grupo) > 0)
+			return view('dashboard.search.grupo')->withDetails($grupo)->withQuery($q);
+		else
+			return view ('dashboard.search.grupo')->withMessage($msg);
+	}		
 			
 	public function redirecionaAJUSTE(Request $request)
 	{	

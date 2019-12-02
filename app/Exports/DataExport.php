@@ -13,16 +13,27 @@ class DataExport implements FromCollection
     public function collection()
     {
         return Fisco::all();
+		/*return collect([
+            [
+                'ncm' => '',
+                'cest' => '',
+                'descricao' => '',
+                'mva' => '',
+				'grupo' => ''
+            ]
+        ]);
+		*/
+		
     }
 
     public function headings(): array
     {
         return [
-            'fisco ncm',
-            'fisco cest',
-            'fisco desc',
-			'fisco mva',
-			'fisco grupo'
+            'NCM',
+            'CEST',
+            'DESCRICAO',
+			'MVA',
+			'GRUPO'
         ];
     }
 }
